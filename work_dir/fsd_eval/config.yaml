@@ -1,0 +1,73 @@
+# command line: E:\compete\基于无人机的人体行为识别\main.py
+
+base_lr: 0.1
+batch_size: 32
+bone: false
+config: config/default.yaml
+cpu: false
+device: []
+eval_feeder_args: {}
+eval_interval: 5
+feeder: feeders.feeder.Feeder
+ignore_weights: []
+log_interval: 100
+lr_decay_rate: 0.1
+model: model.ctrgcn.Model
+model_args:
+  drop_out: 0.4
+  graph: graph.graph_17.Graph
+  graph_args:
+    labeling_mode: spatial
+  num_class: 155
+  num_person: 2
+  num_point: 17
+model_saved_name: fsd
+motion: false
+nesterov: true
+num_epoch: 70
+num_worker: 6
+optimizer: SGD
+phase: predict
+print_log: true
+save_epoch: 50
+save_interval: 1
+save_score: false
+seed: 1
+show_topk:
+- 1
+- 5
+start_epoch: 0
+step:
+- 15
+- 35
+- 50
+- 60
+test_batch_size: 32
+test_feeder_args:
+  bone: false
+  data_path: data/test_joint_B.npy
+  debug: false
+  motion: false
+  p_interval:
+  - 0.95
+  split: test
+  window_size: 300
+train_feeder_args:
+  augmentation: avg
+  data_path: data/train_joint.npy
+  debug: false
+  label_path: data/train_label.npy
+  normalization: false
+  p_interval:
+  - 0.3
+  - 1
+  random_choose: true
+  random_move: true
+  random_rot: true
+  random_shift: true
+  split: train
+  window_size: 300
+warm_up_epoch: 5
+weight_decay: 0.0013
+weights: work_dir/fsd_eval/runs-52-53404.pdparams
+work_dir: work_dir/fsd_eval
